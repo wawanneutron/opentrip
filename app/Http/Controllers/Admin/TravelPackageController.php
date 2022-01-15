@@ -50,7 +50,7 @@ class TravelPackageController extends Controller
         $data['lodging_house'] = $request->get('lodging_house') == 'true' ? 1 : 0;
 
         TravelPackage::create($data);
-        return redirect()->route('travel-package.index');
+        return redirect()->route('admin.travel-package.index');
     }
 
     /**
@@ -98,7 +98,7 @@ class TravelPackageController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('travel-package.index');
+        return redirect()->route('admin.travel-package.index');
     }
 
     /**
@@ -112,6 +112,6 @@ class TravelPackageController extends Controller
         $item = TravelPackage::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('travel-package.index');
+        return redirect()->route('admin.travel-package.index');
     }
 }

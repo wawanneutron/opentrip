@@ -46,17 +46,31 @@ Route::get('/checkout/confirm/{id}', 'CheckoutController@succses')
     ->Middleware(['auth', 'verified']);
 
 // admin dashboard
-Route::prefix('admin/dashboard')
-    ->namespace('Admin')
-    ->middleware(['auth', 'admin'])
-    ->group(function () {
-        Route::get('/', 'DashboardController@index')
-            ->name('dashboard');
+// Route::prefix('admin/dashboard')
+//     ->namespace('Admin')
+//     ->middleware(['auth', 'admin'])
+//     ->group(function () {
+//         Route::get('/', 'DashboardController@index')
+//             ->name('dashboard');
 
-        Route::resource('travel-package', 'TravelPackageController');
-        Route::resource('gallery', 'GalleryController');
-        Route::resource('transaction', 'TransactionController');
-    });
+//         Route::resource('travel-package', 'TravelPackageController');
+//         Route::resource('gallery', 'GalleryController');
+//         Route::resource('transaction', 'TransactionController');
+//     });
+
+Route::middleware(['auth'])->group(function () {
+    // admin dashboard
+    Route::prefix('admin/dashboard')->namespace('Admin')
+        ->name('admin.')
+        ->middleware('ensureUserRole:admin')
+        ->group(function () {
+            Route::get('/', 'DashboardController@index')
+                ->name('dashboard');
+            Route::resource('travel-package', 'TravelPackageController');
+            Route::resource('gallery', 'GalleryController');
+            Route::resource('transaction', 'TransactionController');
+        });
+});
 
 Auth::routes(['verify' => true]);
 
