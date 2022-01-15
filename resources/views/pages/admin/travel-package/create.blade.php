@@ -20,7 +20,7 @@
       <h1 class="h4 mb-0 text-gray-800">Tambah Paket Travel</h1>
     </div>
     <div class="card-body">
-      <form action="{{ route('travel-package.store') }}" method="POST">
+      <form action="{{ route('admin.travel-package.store') }}" method="POST">
         @csrf
         <div class="row">
           <div class="col-md-6">
@@ -43,7 +43,7 @@
           </div>
           <div class="col-md-3 mt-2">
             <div class="form-group">
-              <label for="type">Type</label>
+              <label for="type">Jenis</label>
               <input type="text" class="form-control" name="type" placeholder="Open Trip" value="{{ old('type') }}">
             </div>
           </div>

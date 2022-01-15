@@ -2,7 +2,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
           <div class="sidebar-brand-text mx-3">
               Opentrip </div>  
                   
@@ -20,7 +20,7 @@
         
         {{-- Dashboard --}}
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
               <i class="fas fa-fw fa-tachometer-alt"></i>
               <span>Dashboard</span></a>
         </li>
@@ -36,7 +36,7 @@
         
         {{-- paket travel --}}
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('travel-package.index') }}">
+            <a class="nav-link" href="{{ route('admin.travel-package.index') }}">
               <i class="fas fa-fw fa-luggage-cart"></i>
               <span>Paket Travel</span></a>
         </li>
@@ -52,7 +52,7 @@
         
         {{-- galeri travel --}}
         <li class="nav-item">
-        <a class="nav-link" href="{{ route('gallery.index') }}">
+        <a class="nav-link" href="{{ route('admin.gallery.index') }}">
               <i class="fas fa-fw fa-images"></i>
               <span>Galeri Travel</span></a>
         </li>
@@ -67,7 +67,7 @@
          
          {{-- Transaksi --}}
          <li class="nav-item">
-             <a class="nav-link" href="{{ route('transaction.index') }}">
+             <a class="nav-link" href="{{ route('admin.transaction.index') }}">
                <i class="fas fa-fw fa-dollar-sign"></i>
                <span>Transaksi</span></a>
          </li>

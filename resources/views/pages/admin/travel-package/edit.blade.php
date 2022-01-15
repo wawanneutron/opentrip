@@ -20,7 +20,7 @@
       <h1 class="h4 mb-0 text-gray-800">Edit Paket Travel</h1>
     </div>
     <div class="card-body">
-      <form action="{{ route('travel-package.update', $item->id) }}" method="POST">
+      <form action="{{ route('admin.travel-package.update', $item->id) }}" method="POST">
         @csrf
         @method('put')
         <div class="row">
