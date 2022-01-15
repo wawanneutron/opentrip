@@ -17,7 +17,6 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('travel_packages_id');
             $table->integer('users_id')->nullable();
-            $table->integer('additional_visa');
             $table->integer('transaction_total');
             $table->string('transaction_status');
             // in_cart, pandding, succsess, cancle, failed
