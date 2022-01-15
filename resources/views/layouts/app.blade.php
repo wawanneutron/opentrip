@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-      @yield('title')
-    </title>
+    <title>{{ $title ?? config('app.name') }}</title>
     @include('includes.style')
     @stack('prepend-style')
     @stack('addon-style')

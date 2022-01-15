@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admin Pealip</title>
+  <title>Admin {{ config('app.name') }}</title>
 
   @include('includes.admin.style')
 
