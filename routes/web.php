@@ -46,7 +46,7 @@ Route::get('/checkout/confirm/{id}', 'CheckoutController@succses')
     ->Middleware(['auth', 'verified']);
 
 // admin dashboard
-Route::prefix('admin')
+Route::prefix('admin/dashboard')
     ->namespace('Admin')
     ->middleware(['auth', 'admin'])
     ->group(function () {
