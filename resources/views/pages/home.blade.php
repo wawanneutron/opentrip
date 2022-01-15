@@ -6,53 +6,49 @@
         <!-- Header Mobile -->
         <header class="header-mobile text-center d-sm-block d-md-none ">
             <div class="animasi-header">
-                <h1>Explore the Beautiful Mountains
+                <h1>Jelajahi Keindahan Alam Indonesia
                     <br>
-                    As Easy One Click</h1>
+                    Semudah Satu Klik</h1>
                 <div class="animasi-p">
-                    <p>You will see beautiful
+                    <p>Kamu akan melihat momen indah
                         <br>
-                        moment you never see before</p>
+                        momen yang belum pernah kamu lihat sebelumnya</p>
                 </div>
             </div>
             <a href="#popular" class="btn btn-get-started ">
-                Get Started
+                Mari Mulai
             </a>
         </header>   
         <!-- Header Desktop -->
         <main class="header-desktop text-center d-none d-md-block ">
             <div class="animasi-header">
-                <h1>Explore the Beautiful Mountains
+                <h1>Jelajahi Keindahan Alam Indonesia
                     <br>
-                    As Easy One Click</h1>
+                    Semudah Satu Klik</h1>
                 <div class="animasi-p">
-                    <p>You will see beautiful
+                    <p>Kamu akan melihat momen indah
                         <br>
-                        moment you never see before</p>
+                        momen yang belum pernah kamu lihat sebelumnya</p>
                 </div>
             </div>
             <a href="#popular" class="btn btn-get-started ">
-                Get Started
+                Mari Mulai
             </a>
         </main> 
         <!-- data statistik -->
         <main>
             <div class="container stat">
                 <section class="section-stats row justify-content-center" id="stats">
-                    <div class="col-2 col-md-2 stats-detail ">
-                        <h2>20K</h2>
-                        <p>Members</p>
-                    </div>
                     <div class="col-3 col-md-2 stats-detail ">
-                        <h2>12</h2>
-                        <p>Countries</p>
+                        <h2>7K</h2>
+                        <p>Customers</p>
                     </div>
     
                     <div class="col-3 col-md-2 stats-detail ">
                         <h2>3K</h2>
                         <p>Hotels</p>
                     </div>
-                    <div class="col-2 col-md-2 stats-detail ">
+                    <div class="col-3 col-md-2 stats-detail ">
                         <h2>14</h2>
                         <p>Partners</p>
                     </div>
@@ -64,10 +60,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center section-popular-heading">
-                        <h2>Climbing Mountains Popular</h2>
+                        <h2>Tujuan Wisata Terpopuler</h2>
     
-                        <p>Something that you never try </p>
-                        <span>before in Climbing Mountains</span>
+                        <p>Jelajahi Wisata Indonesia</p>
+                        <span>Dapatkan pengalaman menarik bersama kami</span>
                     </div>
                 </div>
             </div>

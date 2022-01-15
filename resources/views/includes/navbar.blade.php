@@ -2,11 +2,8 @@
   <div class="container">
     <nav class="row navbar navbar-expand-lg  navbar-light bg-white" id="home">
     <a href="{{ route('home') }}" class="navbar-logo-pealip">
-    <img src="{{ url('frontend/images/pealip.PNG') }}" alt="logo pealip">
-        </a>
-    <a href="{{ route('home') }}" class="navbar-brand">
-    <img src="{{ url('frontend/images/logo.png') }}" alt="nama PEALIP">
-        </a>
+        <img src="{{ asset('frontend/images/trip.png') }}" alt="logo">
+    </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
             aria-controls="navb" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -1,7 +1,6 @@
-@extends('layouts.app')
-
-@section('title', 'Detail Travel')
-
+@extends('layouts.app', [
+    'title' => $item->title . ' - ' . $item->location
+])
 @section('content')
     <!-- detaiils -->
     <main>
@@ -52,34 +51,12 @@
                     {!!  $item->about !!}
                 </p>     
           </div>
-
-              <div class="features row">
-                  <div class="col-md-6">
-                      <div class="descriptions">
-                          <img src="{{ url('frontend/images/featurs.png') }}" alt="" class="features-image">
-                          <h3>Culture</h3>
-                          <p>
-                              {{ $item->culture }}
-                          </p>
-                      </div>
-
-                  </div>
-                  <div class="col-md-6">
-                      <div class="descriptions">
-                          <img src="{{ url('frontend/images/featurs.png') }}" alt="" class="features-image">
-                          <h3>Canton</h3>
-                          <p>
-                            {{ $item->canton }}
-                          </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
+        </div>
       </div>
       <!-- Right Content - Members are going -->
       <div class="col-lg-4">
           <div class="card card-details card-right">
-              <h3>Members are going</h3>
+              <h3>Member yang bergabung</h3>
               <div class="members my-2">
                   <img src="{{ url('frontend/images/user-join/user1.png') }}" alt="" class="member-image">
                   <img src="{{ url('frontend/images/user-join/user2.png')}}" alt="" class="member-image">
@@ -88,23 +65,23 @@
                   <img src="{{ url('frontend/images/user-join/user5.png')}}" alt="" class="member-image">
               </div>
               <hr>
-              <h3>Trip Informations</h3>
+              <h3>Informasi Perjalanan</h3>
               <table class="trip-informations">
                   <tr>
-                      <th width="50%" class="date">Date of Departure</th>
+                      <th width="50%" class="date">Keberangkatan</th>
                   <td width="50%" class="text-right">{{ \Carbon\Carbon::create($item->deperture_date)->format('F n, Y') }}</td>
                   </tr>
                   <tr>
-                      <th width="50%" class="date">Duration</th>
+                      <th width="50%" class="date">Durasi</th>
                       <td width="50%" class="text-right">{{ $item->duration }}</td>
                   </tr>
                   <tr>
-                      <th width="50%" class="date">Type</th>
+                      <th width="50%" class="date">Jenis</th>
                       <td width="50%" class="text-right">{{ $item->type }}</td>
                   </tr>
                   <tr>
-                      <th width="50%" class="date">Price</th>
-                      <td width="50%" class="text-right">${{ $item->price }},00 / person </td>
+                      <th width="50%" class="date">Harga</th>
+                      <td width="50%" class="text-right">{{ moneyFormat($item->price) }} / orang </td>
                   </tr>
               </table>
           </div>
