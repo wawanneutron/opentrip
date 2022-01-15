@@ -18,35 +18,35 @@
         <table class="table table-bordered table-responsive-sm" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Location</th>
+              <th>No</th>
+              <th>Judul</th>
+              <th>Kuota</th>
+              <th>Lokasi</th>
               <th>Type</th>
-              <th>Deperture Date</th>
-              <th>Type</th>
+              <th>Tgl Keberangkatan</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            @forelse ($items as $item)
+            @forelse ($items as $index => $item)
             <tr>
-              <td> {{ $item->id }} </td>
+              <td>{{ $index +1 }}</td>
               <td> {{ $item->title }} </td>
+              <td> {{ $item->quota }} </td>
               <td> {{ $item->location }} </td>
               <td> {{ $item->type }} </td>
               <td> {{ $item->deperture_date }} </td>
-              <td> {{ $item->type }} </td>
               <td>
-              <a href="{{ route('travel-package.edit', $item->id) }}" class="btn btn-info">
-                <i class="fa fa-pencil-alt"></i>
-              </a>
-            <form action="{{ route('travel-package.destroy', $item->id) }}" method="POST" class="d-inline">
-              @csrf
-              @method('delete')
-              <button class="btn btn-danger">
-                <i class="fa fa-trash"></i>
-              </button>
-            </form>
+                <a href="{{ route('travel-package.edit', $item->id) }}" class="btn btn-info">
+                  <i class="fa fa-pencil-alt"></i>
+                </a>
+                  <form action="{{ route('travel-package.destroy', $item->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form>
               </td>
             </tr>
             @empty

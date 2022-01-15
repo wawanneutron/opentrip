@@ -18,7 +18,7 @@ class TravelPackageController extends Controller
      */
     public function index()
     {
-        $items = TravelPackage::all();
+        $items = TravelPackage::latest()->get();
 
         return view('pages.admin.travel-package.index', [
             'items' => $items
@@ -45,6 +45,9 @@ class TravelPackageController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
+
+        $data['eat'] = $request->get('eat') == 'true' ? 1 : 0;
+        $data['lodging_house'] = $request->get('lodging_house') == 'true' ? 1 : 0;
 
         TravelPackage::create($data);
         return redirect()->route('travel-package.index');
@@ -85,10 +88,13 @@ class TravelPackageController extends Controller
      */
     public function update(TravelPackageRequest $request, $id)
     {
+        $item = TravelPackage::findOrFail($id);
+
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
 
-        $item = TravelPackage::findOrFail($id);
+        $data['eat'] = $request->get('eat') == 'true' ? 1 : 0;
+        $data['lodging_house'] = $request->get('lodging_house') == 'true' ? 1 : 0;
 
         $item->update($data);
 
