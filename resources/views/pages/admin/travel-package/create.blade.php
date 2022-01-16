@@ -25,14 +25,14 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="title">Judul Opentrip</label>
-              <input type="text" class="form-control" name="title" placeholder="Gunung Semeru Indonesia" value="{{ old('title') }}">
+              <label for="title">Tempat Tujuan Opentrip</label>
+              <input type="text" class="form-control" name="title" placeholder="Candi Dieng" value="{{ old('title') }}">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="location">location</label>
-              <input type="text" class="form-control" name="location" placeholder="Location" value="{{ old('location') }}">
+              <label for="location">Lokasi</label>
+              <input type="text" class="form-control" name="location" placeholder="Dieng - Jawa Tengah" value="{{ old('location') }}">
             </div>
           </div>
           <div class="col-md-3 mt-2">
@@ -93,8 +93,14 @@
           </div>
           <div class="col-12 mt-2">
             <div class="form-group">
-              <label for="about">About</label>
-              <textarea name="about" id="About" rows="10" class="d-block w-100 form-control">{{ old('about') }}</textarea>
+              <label>Include</label>
+              <textarea name="includes" id="editorInclude">{{ old('includes') }}</textarea>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="form-group">
+              <label>Tentang/Sejarah</label>
+              <textarea name="about" id="editorAbout">{{ old('about') }}</textarea>
             </div>
           </div>
         </div>
@@ -107,3 +113,23 @@
 </div>
 
 @endsection
+
+@push('addon-script')
+  <script>
+      ClassicEditor
+          .create( document.querySelector( '#editorAbout' ) )
+          .catch( error => {
+              console.error( error );
+          } );
+  </script>
+@endpush
+
+@push('prepend-script')
+  <script>
+      ClassicEditor
+          .create( document.querySelector( '#editorInclude' ) )
+          .catch( error => {
+              console.error( error );
+          } );
+  </script>
+@endpush

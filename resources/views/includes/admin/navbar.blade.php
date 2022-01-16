@@ -16,7 +16,7 @@
                     {{ Auth::user()->email }}
                   </span>
                   
-                  <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                    <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" style="width: 45px !important;" alt="user" class="rounded-circle mr-2" style="width: 50px; height: 50px;" />
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

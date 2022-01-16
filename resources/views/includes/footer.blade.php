@@ -62,7 +62,7 @@
                 <a href="#">0821-222-1123</a>
               </li>
               <li>
-                <a href="#">wawanneutron1331@gmail.com</a>
+                <a href="#">helpopentrip@gmail.com</a>
               </li>
             </ul>
           </div>
@@ -74,7 +74,7 @@
   <div class="container-fluid">
     <div class="row border-top justify-content-center align-items-center pt-4">
       <div class="col-auto text-gray-500 font-weight-light">
-          2020 Copyright WawanNeutron - All right reserved - Media in Tangerang - Indonesia
+          {{ date('Y') }} Copyright <a href="{{ url('https://timmixcode.my.id') }}" target="__blank">MixCode</a> - {{ config('app.name') }} - All right reserved - Tangerang - Indonesia
       </div>
     </div>
   </div>

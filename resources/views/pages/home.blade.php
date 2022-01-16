@@ -41,7 +41,7 @@
                 <section class="section-stats row justify-content-center" id="stats">
                     <div class="col-3 col-md-2 stats-detail ">
                         <h2>7K</h2>
-                        <p>Customers</p>
+                        <p>Members</p>
                     </div>
     
                     <div class="col-3 col-md-2 stats-detail ">

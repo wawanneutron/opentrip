@@ -10,35 +10,58 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navb">
-            <ul class="navbar-nav ml-auto mr-3">
-
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item mx-md-2">
                     <a class="nav-link active" href="#home">Home </a>
                 </li>
                 <li class="nav-item mx-md-2 ">
                     <a class="nav-link" href="#popular">Paket Travel</a>
                 </li>
-
-                <!-- dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Service
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-
                 <li class="nav-item mx-md-2">
                     <a class="nav-link" href="#testimonialHeading">Testimonial</a>
                 </li>
 
             </ul>
-
-   
+            @if (Auth::user() && Auth::user()->is_admin == 1)
+                @auth
+                    <ul class="navbar-nav ml-auto mr-3">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link p-0 nav-avatar" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" style="width: 45px !important;" alt="user" class="rounded-circle mr-2" style="width: 50px; height: 50px;" />
+                                Hi, {{ Auth::user()->name }} <i class="fas fa-caret-down ms-1"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <i class="fas fa-fw fa-tachometer-alt me-1 text-black-50"></i>
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#">
+                                        <i class="fas fa-user-cog me-1 text-black-50"></i>
+                                        My Profile</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                @endauth
+            @else
+                @auth
+                    <ul class="navbar-nav ml-auto mr-3">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link p-0 nav-avatar" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" style="width: 45px !important;" alt="user" class="rounded-circle mr-2" style="width: 50px; height: 50px;" />
+                                Hi, {{ Auth::user()->name }} <i class="fas fa-caret-down ms-1"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">
+                                        <i class="fas fa-fw fa-tachometer-alt me-1 text-black-50"></i>
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#">
+                                        <i class="fas fa-user-cog me-1 text-black-50"></i>
+                                        My Profile</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                @endauth
+            @endif
+            
             @guest
                 <!-- mobile Button Masuk -->
                 <form action="#" class="form-inline d-sm-block d-lg-none">

@@ -494,9 +494,10 @@ header .animasi-header.muncul {
 }
 
 .section-details-content .card-details p {
-    font-size: 18px;
-    font-weight: 300;
-    color: #9498a0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #071c4d;
+    line-height: 30px;
 }
 
 .section-details-content .card-details h2 {
@@ -678,6 +679,7 @@ header .animasi-header.muncul {
 
 .section-details-content .join-container .btn-join-now {
     color: #ffffff;
+    font-weight: 400;
     background-color: #ff6f01;
 }
 

@@ -11,7 +11,6 @@ class TransactionDetail extends Model
 
     protected $fillable = [
         'transactions_id', 'username',
-
     ];
 
     protected $hidden = [

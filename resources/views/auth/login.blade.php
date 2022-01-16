@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row page-login d-flex align-items-center">
             <div class="section-left col-12 col-md-6 picture-login">
-                <h1 class="mb-4">We explore the new <br> much better</h1>
+                <h1 class="mb-4">Jelajahi hal yang baru<br> bersama kami</h1>
                 <img src="/frontend/images/pictures-login.png" alt="" class="w-75 d-none d-sm-flex">
             </div>
             <div class="section-right col-12 col-md-4">

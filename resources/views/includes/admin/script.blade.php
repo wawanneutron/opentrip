@@ -14,3 +14,5 @@
   <!-- Page level custom scripts -->
   <script src="{{ url('backend/js/demo/chart-area-demo.js') }} "></script>
   <script src="{{ url('backend/js/demo/chart-pie-demo.js') }} "></script>
+  {{-- ck editor --}}
+  <script src="{{ url('https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js') }}"></script>

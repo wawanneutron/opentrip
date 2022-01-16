@@ -10,7 +10,7 @@ class TravelPackage extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'slug', 'quota', 'location', 'about', 'lodging_house', 'eat', 'deperture_date', 'duration', 'type', 'price'
+        'title', 'slug', 'quota', 'location', 'about', 'includes', 'lodging_house', 'eat', 'deperture_date', 'duration', 'type', 'price'
     ];
 
     protected $hidden = [

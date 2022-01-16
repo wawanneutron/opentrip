@@ -16,10 +16,9 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Travel</th>
-                <th>User</th>
-                <th>Visa</th>
-                <th>Total</th>
+                <th>Open Trip</th>
+                <th>Member / User</th>
+                <th>Harga Open Trip</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -30,23 +29,22 @@
                 <td> {{ $item->id }} </td>
                 <td> {{ $item->travel_package->title }} </td>
                 <td> {{ $item->user->name }} </td>
-                <td> {{ $item->additional_visa }} </td>
-                <td> {{ $item->transaction_total }} </td>
+                <td> {{ moneyFormat($item->transaction_total) }} </td>
                 <td> {{ $item->transaction_status }} </td>
                 <td>
-                <a href="{{ route('transaction.show', $item->id) }}" class="btn btn-primary">
-                  <i class="fa fa-eye"></i>
-                </a>
-                <a href="{{ route('transaction.edit', $item->id) }}" class="btn btn-info">
-                  <i class="fa fa-pencil-alt"></i>
-                </a>
-              <form action="{{ route('transaction.destroy', $item->id) }}" method="POST" class="d-inline">
-                @csrf
-                @method('delete')
-                <button class="btn btn-danger">
-                  <i class="fa fa-trash"></i>
-                </button>
-              </form>
+                  <a href="{{ route('admin.transaction.show', $item->id) }}" class="btn btn-primary">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a href="{{ route('admin.transaction.edit', $item->id) }}" class="btn btn-info">
+                    <i class="fa fa-pencil-alt"></i>
+                  </a>
+                  <form action="{{ route('admin.transaction.destroy', $item->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form>
                 </td>
               </tr>
               @empty

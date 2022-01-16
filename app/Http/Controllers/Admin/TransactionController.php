@@ -45,11 +45,11 @@ class TransactionController extends Controller
      */
     public function store(TransactionRequest $request)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
+        // $data = $request->all();
+        // $data['slug'] = Str::slug($request->title);
 
-        Transaction::create($data);
-        return redirect()->route('transaction.index');
+        // Transaction::create($data);
+        // return redirect()->route('admin.transaction.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class TransactionController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('transaction.index');
+        return redirect()->route('admin.transaction.index');
     }
 
     /**
@@ -114,6 +114,6 @@ class TransactionController extends Controller
         $item = Transaction::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('transaction.index');
+        return redirect()->route('admin.transaction.index');
     }
 }

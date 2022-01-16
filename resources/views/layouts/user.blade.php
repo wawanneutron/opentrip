@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admin {{ config('app.name') }}</title>
+  <title>Dashboard User &dash; {{ config('app.name') }}</title>
 
   @include('includes.admin.style')
 
@@ -20,7 +20,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    @include('includes.admin.sidebar')
+    @include('includes.user.sidebar')
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -71,8 +71,6 @@
   </div>
 
   @include('includes.admin.script')
-  @stack('addon-script')
-  @stack('prepend-script')
 
 </body>
 

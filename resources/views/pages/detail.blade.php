@@ -45,10 +45,8 @@
                                 </div>
                             @endif
                             <div class="about-travel">
-                                <h2>About Travel </h2>
-                                <p> 
-                                    {!!  $item->about !!}
-                                </p>     
+                                <h2>Sekilas tentang {{ $item->title }} </h2> <br>
+                                <p>{!!  $item->about !!}</p>
                             </div>
                         </div>
                     </div>
@@ -79,21 +77,66 @@
                                     <td width="50%" class="text-right">{{ $item->type }}</td>
                                 </tr>
                                 <tr>
+                                    <th width="50%" class="date">Sisa Kuota</th>
+                                    <td width="50%" class="text-right">{{ $item->quota }} orang</td>
+                                </tr>
+                                <tr>
                                     <th width="50%" class="date">Harga</th>
                                     <td width="50%" class="text-right">{{ moneyFormat($item->price) }} / orang </td>
                                 </tr>
                             </table>
+                            <div class="benefit mt-2">
+                                @switch($item->eat or $item->lodging_house)
+                                    @case(false)
+                                        @break
+                                    @case(true)
+                                        <hr>    
+                                        <h3 style="font-size: 18px">Benefits</h3>
+                                    @break
+                                    @default
+                                @endswitch
+                                @switch($item->lodging_house)
+                                    @case(true)
+                                        <ul style="padding-left: 0;" class="list-unstyled">
+                                            <li>👉 Free Penginapan selama opentrip</li>
+                                        </ul>
+                                        @break
+                                    @default
+                                @endswitch
+                                 @switch($item->eat)
+                                    @case(true)
+                                        <ul style="padding-left: 0;" class="list-unstyled">
+                                            <li style="padding-bottom: 10px;">👉 Free Makan Selama 3x sehari</li>
+                                        </ul>
+                                        @break
+                                    @default
+                                @endswitch
+                            </div>
+                            <hr>
+                            <div class="include mt-2">
+                                <h3 style="font-size: 18px">Includes</h3>
+                                <p style="color: #071c4dc4;">
+                                    {!! $item->includes !!}
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="exclude mt-2">
+                                <h3 style="font-size: 18px">Exclude</h3>
+                                <p style="font-size: 16px; color: #071c4dc4; font-weight: 600;">
+                                    ❌ yang tidak disebutkan    
+                                </p>
+                            </div>
                         </div>
                         <!-- CTE -->
                         <div class="join-container">
                             @auth
                             <form action="{{ route('checkout-process', $item->id) }}" method="POST">
                             @csrf
-                                    <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">Join Now</button>
+                                    <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">Join Open Trip</button>
                             </form>
                             @endauth
                             @guest
-                                <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">Login or Register to Join</a>
+                                <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">login / register dulu yuk</a>
                             @endguest
                         </div>
                     </div>
