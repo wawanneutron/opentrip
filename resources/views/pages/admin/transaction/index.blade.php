@@ -15,7 +15,8 @@
           <table class="table table-bordered table-responsive-sm" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>No</th>
+                <th>Kode Transaksi</th>
                 <th>Open Trip</th>
                 <th>Member / User</th>
                 <th>Harga Open Trip</th>
@@ -24,9 +25,10 @@
               </tr>
             </thead>
             <tbody>
-            @forelse ($items as $item)
+            @forelse ($items as $index => $item)
               <tr>
-                <td> {{ $item->id }} </td>
+                <td>{{ $index +1 }}</td>
+                <td> {{ $item->kd_transaction }} </td>
                 <td> {{ $item->travel_package->title }} </td>
                 <td> {{ $item->user->name }} </td>
                 <td> {{ moneyFormat($item->transaction_total) }} </td>

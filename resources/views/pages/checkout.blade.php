@@ -50,15 +50,19 @@
                   <tbody>
                     <tr>
                       <td>
-                        <img src="https://ui-avatars.com/api/?name={{ $detail->username }}" class="rounded-circle"height="60"alt="">
+                        <img src="https://ui-avatars.com/api/?name={{ $detail->user->username }}" class="rounded-circle"height="60"alt="">
                       </td>
                       <td class="align-middle">
-                         {{ $detail->username }}
+                         {{ $detail->user->username }}
                       </td>
                       <td class="align-middle">
-                        <a href="{{ route('checkout-remove', $detail->id) }}">
-                          <i class="fas fa-fw fa-trash"></i>
-                        </a>
+                        @if ($detail->user->id == Auth::user()->id)
+                            <span class="badge badge-success">akun kamu</span>
+                        @else
+                            <a href="{{ route('checkout-remove', $detail->id) }}">
+                              <i class="fas fa-fw fa-trash text-danger"></i>
+                            </a>
+                        @endif
                       </td>
                      </tr>
                   </tbody>
@@ -72,27 +76,62 @@
 
                 <!-- add member -->
         <div class="member mt-3">
-          <h3>Ajak teman untuk bergabung</h3>
+          <h3>Ayo ajak temanmu untuk bergabung</h3>
             <!-- form input add member -->
-            <form action="{{ route('checkout-create', $item->id) }}" method="POST">
+            <form action="{{ route('serch-freand', $item->id) }}" method="POST">
               @csrf
-                <div class="row">
+                <div class="row text-center">
                   <div class="col-md-8">
                     <label for="username" class="sr-only">Name</label>
-                    <input type="text" name="username" class="form-control mb-2 mt-2 mr-2 " id="username"placeholder="Username" required>
+                    <input type="text" name="username" class="form-control mb-2 mt-2" id="username"placeholder="Cari berdasarkan username" required>
                   </div>
                   <div class="col-md-4">
-                    <button type="submit" class="btn btn-add-now mb-2 px-4 mt-2">Tambahkan</button>
+                    <button type="submit" class="btn btn-add-now mb-2 px-5 mt-2">Cari Teman Saya</button>
                   </div>
                 </div>
             </form>
-            <!-- note -->
-            <div class="bg alert-primary">
-                <h3 class="mt-4 mb-0 ml-3">Note :</h3>
-                <p class="note mb-0 mt-2 m-3">
-                    Anda hanya dapat menambahkan anggota yang telah terdaftar di sistem kami
-                </p>
-                  </div>
+            {{-- result serach --}}
+            @if (!empty($users))
+              <form action="{{ route('checkout-add-friend', $item->id) }}" method="post">
+              @csrf
+                <div class="who-is-going">
+                    <table class="table table-responsive-sm text-center">
+                      <thead>
+                        <tr>
+                          <td>Picture</td>
+                          <td>ID</td>
+                          <td>Username</td>
+                          <td></td>
+                        </tr>
+                      </thead>
+
+                      @forelse ($users as $user)
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img src="https://ui-avatars.com/api/?name={{ $user->username }}" class="rounded-circle"height="60"alt="">
+                            </td>
+                            <td class="align-middle">
+                              {{ $user->id }}
+                            </td>
+                            <td class="align-middle">
+                              {{ $user->username }}
+                            </td>
+                            <td class="align-middle">
+                              <input type="hidden" name="users_id" value="{{ $user->id }}">
+                              <button type="submit" class="btn btn-sm btn-add-now mb-2"><i class="fas fa-plus" title="tambahkan"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      @empty
+                          <tr>
+                            <td class="text-center" colspan="6">Teman mu tidak ada disitem kami, <br> segera lakukan registrasi terlebih dahulu agar terdaftar disitem kami</td>
+                          </tr>
+                      @endforelse
+                    </table>
+                </div>
+              </form>
+            @endif
               </div>
           </div>
         </div>
@@ -117,7 +156,7 @@
                               <th width="50%" class="date">Harus Dibayar (+Unique)</th>
                               <td width="50%" class="text-right text-total">
                                   <span class="text-blue">{{ moneyFormat($item->transaction_total) }},</span>
-                              <span class="text-orange">{{ mt_rand(0,999) }}</span>
+                              <span class="text-orange">{{ mt_rand(0,99) }}</span>
                               </td>
 
                           </tr>

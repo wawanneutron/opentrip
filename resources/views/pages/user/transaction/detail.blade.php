@@ -25,8 +25,8 @@
       <div class="card-body">
         <table class="table-bordered table-responsive-sm">
             <tr>
-               <th>ID</th>
-               <td>{{ $item->id }}</td>
+               <th>Kode Transaksi</th>
+               <td>{{ $item->kd_transaction }}</td>
             </tr>
             <tr>
               <th>Paket Travel</th>
@@ -37,12 +37,8 @@
               <td>{{ $item->user->name }}</td>
             </tr>
             <tr>
-              <th>Additional Visa</th>
-              <td>${{ $item->additional_visa }}</td>
-            </tr>
-            <tr>
-              <th>Total Transaction</th>
-              <td>${{ $item->transaction_total }}</td>
+              <th>Total Transaksi</th>
+              <td>{{ moneyFormat($item->transaction_total )}}</td>
             </tr>
             <tr>
               <th>Status Transaction</th>
@@ -53,19 +49,13 @@
                 <td>
                     <table class="table table-bordered">
                         <tr>
-                            <th>ID</th>
                             <th>Nama</th>
-                            <th>Nationality</th>
-                            <th>Visa</th>
-                            <th>DOE Passport</th>
+                            <th>Email</th>
                         </tr>
                         @foreach ($item->details as $detail)
                             <tr>
-                                <td>{{ $detail->id }}</td>
-                                <td>{{ $detail->username }}</td>
-                                <td>{{ $detail->nationality }}</td>
-                                <td>{{ $detail->is_visa ? '30 Days' : 'N/A' }}</td>
-                                <td>{{ $detail->doe_passport }}</td>
+                                <td>{{ $detail->user->username }}</td>
+                                <td>{{ $detail->user->email }}</td>
                             </tr>
                         @endforeach
                     </table>

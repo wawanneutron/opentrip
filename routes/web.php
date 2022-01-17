@@ -29,8 +29,12 @@ Route::get('/checkout/{id}', 'CheckoutController@index')
     ->name('checkout')
     ->middleware(['ensureUserRole:user', 'verified']);
 
+Route::post('/checkout/search-friend/{detail_id}', 'CheckoutController@searchFreand')
+    ->name('serch-freand')
+    ->middleware(['ensureUserRole:user', 'verified']);
+
 Route::post('/checkout/create/{detail_id}', 'CheckoutController@create')
-    ->name('checkout-create')
+    ->name('checkout-add-friend')
     ->middleware(['ensureUserRole:user', 'verified']);
 
 Route::get('/checkout/remove/{detail_id}', 'CheckoutController@remove')
