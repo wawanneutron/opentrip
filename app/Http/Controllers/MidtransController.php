@@ -6,6 +6,7 @@ use App\Mail\TransactionSuccess;
 use App\Transaction;
 use App\TransactionDetail;
 use App\TravelPackage;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
@@ -34,7 +35,7 @@ class MidtransController extends Controller
         $transaction = Transaction::whereKdTransaction($order_id)->first();
         $travel_package = TravelPackage::whereId($transaction->travel_packages_id)->first();
         $transactions_detail_count = TransactionDetail::whereTransactionsId($transaction->id)->count();
-        $transactions_detail = TransactionDetail::with('user')->whereTransactionsId($transaction->id)->get();
+        $transactions_detail = TransactionDetail::whereTransactionsId($transaction->id)->get();
 
         // Handle notification status midtrans
         if ($status == 'settlement') {
@@ -62,17 +63,9 @@ class MidtransController extends Controller
         } else if ($status == 'cancel') {
             $transaction->transaction_status = 'FAILED';
         }
-
-        // kirimakan email ke masing masing member
-        // // $object = json_decode(json_encode($transactions_detail), FALSE);
-        // $object = new stdClass();
-        // foreach ($transactions_detail as $key => $value) {
-        //     $object->$key = $value;
-        // }
-        // dd($object);
-        // exit();
         $transaction->save();
 
+        // kirimakan email ke masing masing member
         if ($transaction) {
             if ($status == 'capture' && $fraud == 'acept') {
                 Mail::to($transaction->user)->send(new TransactionSuccess($transaction));

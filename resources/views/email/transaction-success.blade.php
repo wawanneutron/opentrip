@@ -274,12 +274,13 @@
                             <td align="left" style="font-size:0px;padding:10px 25px;padding-right:25px;padding-left:25px;word-break:break-word;">
                               <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#071c4d;font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;line-height:28px;table-layout:auto;width:100%;border:none;">
                                 <tr>
-                                  <td colspan="3">Members</td>
+                                  <td >Members</td>
+                                  <td style="text-align: right;">No E-Ticket</td>
                                 </tr>
                                 @foreach ($data->details as $item)
                                   <tr>
-                                  <td><strong>{{ ($item->username) }}</strong></td>
-                                  <td style="text-align: right; font-weight:500;">{{ $item->nationality }}</td>
+                                  <td><strong style="font-size: 16px;">{{ ($item->user->name) }}</strong></td>
+                                  <td style="text-align: right; font-weight:500; font-size: 16px;">{{ $item->no_ticket }}</td>
                                   </tr>
                                 @endforeach
                               </table>
@@ -309,7 +310,7 @@
                               <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
                                 <tr>
                                   <td align="center" bgcolor="#E87B17" role="presentation" style="border:none;border-radius:10px;cursor:auto;mso-padding-alt:10px 25px;background:#E87B17;" valign="middle">
-                                  <a href="{{ url('checkout/' . $data->id ) }}" style="display:inline-block;background:#E87B17;color:#ffffff;font-family:Assistant, Helvetica, Arial, sanf-serif;font-size:18px;font-weight:400;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:10px;"> Check Detail </a>
+                                  <a href="{{ url('user/dashboard/history-transaction/' . $data->id ) }}" style="display:inline-block;background:#E87B17;color:#ffffff;font-family:Assistant, Helvetica, Arial, sanf-serif;font-size:18px;font-weight:400;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:10px;"> Check Detail </a>
                                   </td>
                                 </tr>
                               </table>
