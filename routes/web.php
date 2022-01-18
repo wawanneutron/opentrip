@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'DashboardUserController@index')->name('dashboard');
             Route::get('/history-transaction', 'DashboardUserController@historyTransaction')->name('dashboard-history');
             Route::get('/history-transaction/{id}', 'DashboardUserController@detailTransaction')->name('detail-transaction');
+            Route::delete('/history-transaction/delete/{id}', 'DashboardUserController@destroy')->name('destory-incart');
         });
 });
 
