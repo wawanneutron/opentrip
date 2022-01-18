@@ -49,15 +49,29 @@
                 <td>
                     <table class="table table-bordered">
                         <tr>
+                          @if ($item->transaction_status == 'IN_CART' || $item->transaction_status == 'PENDING')
                             <th>User ID</th>
                             <th>Nama</th>
                             <th>Email</th>
-                        </tr>
+                          @else
+                            <th>User ID</th>
+                            <th>No Tiket</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                          @endif
+                          </tr>
                         @foreach ($item->details as $detail)
                             <tr>
+                              @if ($item->transaction_status == 'IN_CART' || $item->transaction_status == 'PENDING')
                                 <td>{{ $detail->user->userid }}</td>
                                 <td>{{ $detail->user->username }}</td>
                                 <td>{{ $detail->user->email }}</td>
+                              @else
+                                <td>{{ $detail->user->userid }}</td>
+                                <td>{{ $detail->no_ticket }}</td>
+                                <td>{{ $detail->user->username }}</td>
+                                <td>{{ $detail->user->email }}</td>
+                              @endif
                             </tr>
                         @endforeach
                     </table>

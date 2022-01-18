@@ -130,10 +130,14 @@
                         <!-- CTE -->
                         <div class="join-container">
                             @auth
-                            <form action="{{ route('checkout-process', $item->id) }}" method="POST">
-                            @csrf
-                                    <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">Join Open Trip</button>
-                            </form>
+                                @if (!$item->quota <= 0)
+                                    <form action="{{ route('checkout-process', $item->id) }}" method="POST">
+                                    @csrf
+                                            <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">Join Open Trip</button>
+                                    </form>
+                                @else
+                                    <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">Kuota Sudah Penuh</button>
+                                @endif
                             @endauth
                             @guest
                                 <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">login / register dulu yuk</a>
