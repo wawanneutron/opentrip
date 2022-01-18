@@ -7,6 +7,7 @@ use App\Transaction;
 use App\TransactionDetail;
 use App\TravelPackage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Midtrans\Notification;
 use Midtrans\Config;
@@ -34,11 +35,24 @@ class MidtransController extends Controller
         $travel_package = TravelPackage::whereId($transaction->travel_packages_id)->first();
         $transactions_detail_count = TransactionDetail::whereTransactionsId($transaction->id)->count();
         $transactions_detail = TransactionDetail::with('user')->whereTransactionsId($transaction->id)->get();
+
         // Handle notification status midtrans
         if ($status == 'settlement') {
+            /* loop no tiket ke setiap teman yang ditambahkan */
+            foreach ($transactions_detail as $datas) {
+                $length = 6;
+                $random = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+                }
+                $no_tiket = 'TKET-' . Str::upper($random);
+                $datas->no_ticket = $no_tiket;
+                $datas->update();
+            }
             $transaction->transaction_status = 'SUCCESS';
             $travel_package->quota -= $transactions_detail_count;
             $travel_package->save();
+            ##gw ganteng
         } else if ($status == 'pending') {
             $transaction->transaction_status = 'PENDING';
         } else if ($status == 'deny') {
@@ -49,6 +63,7 @@ class MidtransController extends Controller
             $transaction->transaction_status = 'FAILED';
         }
 
+        // kirimakan email ke masing masing member
         // // $object = json_decode(json_encode($transactions_detail), FALSE);
         // $object = new stdClass();
         // foreach ($transactions_detail as $key => $value) {
@@ -58,7 +73,6 @@ class MidtransController extends Controller
         // exit();
         $transaction->save();
 
-        // kirimakan email ke masing masing member
         if ($transaction) {
             if ($status == 'capture' && $fraud == 'acept') {
                 Mail::to($transaction->user)->send(new TransactionSuccess($transaction));
