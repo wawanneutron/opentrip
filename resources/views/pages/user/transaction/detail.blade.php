@@ -59,6 +59,9 @@
                             </tr>
                         @endforeach
                     </table>
+                    @if ($item->transaction_status == 'IN_CART')
+                      <a href="{{ route('checkout', $item->id) }}" class="btn btn-block btn-primary">Lanjutkan checkout</a>
+                    @endif
                 </td>
             </tr>
         </table>

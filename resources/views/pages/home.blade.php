@@ -127,7 +127,7 @@
                     <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="card card-testimonial text-center">
                             <div class="testimonial-content">
-                                <img src="/frontend/images/testimonial/testi-1.png" alt="User" class="mb-4 rounded-circle">
+                                <img src="/frontend/images/testimonial/testi-4.png" alt="User" class="mb-4 rounded-circle">
                                 <h3 class="mb-4">Wawan</h3>
                                 <p class="testimonial">
                                     “ Something that
@@ -164,7 +164,7 @@
                         <div class="card card-testimonial text-center">
                             <div class="testimonial-content">
                                 <img src="/frontend/images/testimonial/testi-2.png" alt="User" class="mb-4 rounded-circle">
-                                <h3 class="mb-4">Mr. Hutbel</h3>
+                                <h3 class="mb-4">Mr. Owe</h3>
                                 <p class="testimonial">
                                     “Climbing the mountain gave me aching feet, but it was so much fun ”
                                 </p>

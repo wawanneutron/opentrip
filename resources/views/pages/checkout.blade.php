@@ -40,6 +40,7 @@
               <table class="table table-responsive-sm text-center">
                 <thead>
                   <tr>
+                    <td>User ID</td>
                     <td>Picture</td>
                     <td>Username</td>
                     <td></td>
@@ -49,7 +50,8 @@
                 @forelse ($item->details as $detail)
                   <tbody>
                     <tr>
-                      <td>
+                      <td class="align-middle">{{ $detail->user->userid }}</td>
+                      <td class="align-middle">
                         <img src="https://ui-avatars.com/api/?name={{ $detail->user->username }}" class="rounded-circle"height="60"alt="">
                       </td>
                       <td class="align-middle">
@@ -57,9 +59,8 @@
                       </td>
                       <td class="align-middle">
                         @if ($detail->user->id == Auth::user()->id)
-                            <span class="badge badge-success">akun kamu</span>
                         @else
-                            <a href="{{ route('checkout-remove', $detail->id) }}">
+                            <a href="{{ route('checkout-remove', $detail->id) }}" title="hapus">
                               <i class="fas fa-fw fa-trash text-danger"></i>
                             </a>
                         @endif
@@ -75,7 +76,7 @@
             </div>
 
                 <!-- add member -->
-        <div class="member mt-3">
+        <div class="member mt-5">
           <h3>Ayo ajak temanmu untuk bergabung</h3>
             <!-- form input add member -->
             <form action="{{ route('serch-freand', $item->id) }}" method="POST">
@@ -83,7 +84,7 @@
                 <div class="row text-center">
                   <div class="col-md-8">
                     <label for="username" class="sr-only">Name</label>
-                    <input type="text" name="username" class="form-control mb-2 mt-2" id="username"placeholder="Cari berdasarkan username" required>
+                    <input type="text" name="username" class="form-control mb-2 mt-2" id="username"placeholder="Cari berdasarkan username / userid" required>
                   </div>
                   <div class="col-md-4">
                     <button type="submit" class="btn btn-add-now mb-2 px-5 mt-2">Cari Teman Saya</button>
@@ -98,8 +99,8 @@
                     <table class="table table-responsive-sm text-center">
                       <thead>
                         <tr>
+                          <td>User ID</td>
                           <td>Picture</td>
-                          <td>ID</td>
                           <td>Username</td>
                           <td></td>
                         </tr>
@@ -108,11 +109,9 @@
                       @forelse ($users as $user)
                         <tbody>
                           <tr>
-                            <td>
-                              <img src="https://ui-avatars.com/api/?name={{ $user->username }}" class="rounded-circle"height="60"alt="">
-                            </td>
+                            <td class="align-middle">{{ $user->userid }}</td>
                             <td class="align-middle">
-                              {{ $user->id }}
+                              <img src="https://ui-avatars.com/api/?name={{ $user->username }}" class="rounded-circle"height="60"alt="">
                             </td>
                             <td class="align-middle">
                               {{ $user->username }}
@@ -125,7 +124,7 @@
                         </tbody>
                       @empty
                           <tr>
-                            <td class="text-center" colspan="6">Teman mu tidak ada disitem kami, <br> segera lakukan registrasi terlebih dahulu agar terdaftar disitem kami</td>
+                            <td class="text-center" colspan="6">Teman mu tidak ada disitem kami, <br> segera melakukan registrasi terlebih dahulu agar terdaftar disitem kami</td>
                           </tr>
                       @endforelse
                     </table>

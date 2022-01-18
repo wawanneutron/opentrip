@@ -37,6 +37,15 @@
                   <a href="{{ route('user.detail-transaction', $item->id) }}" class="btn btn-primary">
                     <i class="fa fa-eye"></i>
                   </a>
+                  @if ($item->transaction_status == 'IN_CART')
+                    <form action="{{ route('user.destory-incart', $item->id) }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('delete')
+                      <button class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  @endif
                 </td>
               </tr>
               @empty
