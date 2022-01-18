@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -65,7 +66,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $length = 6;
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+        }
+        $userid = 'ID-' . Str::upper($random);
+
         return User::create([
+            'userid'    => $userid,
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
