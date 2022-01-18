@@ -31,4 +31,12 @@ class DashboardUserController extends Controller
             'item' => $detailTransaction
         ]);
     }
+
+    public function destroy($id)
+    {
+        $item = Transaction::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('user.dashboard-history');
+    }
 }
