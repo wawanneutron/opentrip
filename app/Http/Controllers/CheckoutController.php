@@ -71,24 +71,39 @@ class CheckoutController extends Controller
 
     public function searchFreand(Request $req, $id)
     {
-        $users = User::whereUsername($req->username)->get();
+        $users = User::where('userid', $req->username)
+            ->orWhere('username', $req->username)
+            ->get();
         $item = Transaction::with(['details', 'travel_package', 'user'])->findOrFail($id);
-
         return view('pages.checkout', compact('users', 'item'));
     }
 
     public function create(Request $request, $id)
     {
-        $data['transactions_id'] = $id;
-        $data['users_id'] = $request->users_id;
+        $transaction    = Transaction::with(['travel_package'])->find($id);
+        $cekDetail      = TransactionDetail::whereTransactionsId($id)->count();
+        $cekMember      = TransactionDetail::whereTransactionsId($id)->whereUsersId($request->users_id);
+        $cek_kuota      = $transaction->travel_package->quota;
+        $cek_auth       = $request->users_id == Auth::user()->id;
+        $cek_admin      = $request->users_id == User::whereId(4)->first()->id;
 
-        TransactionDetail::create($data);
-        $transaction = Transaction::with(['travel_package'])->find($id);
+        if ($cek_kuota == $cekDetail) {
+            return 'mohon maaf kuota tidak cukup';
+        } elseif ($cekMember->exists()) {
+            return 'yang ditambahkan hanya bisa satu kali saja';
+        } else {
+            # code...
+            if ($cek_auth || $cek_admin) {
+                return 'Tidak boleh ini kamu iya kamu';
+            } else {
+                $data['transactions_id'] = $id;
+                $data['users_id'] = $request->users_id;
+                TransactionDetail::create($data);
+            }
+            $transaction->transaction_total += $transaction->travel_package->price;
 
-        $transaction->transaction_total += $transaction->travel_package->price;
-
-        $transaction->save();
-
+            $transaction->save();
+        }
         return redirect()->route('checkout', $id);
     }
 
