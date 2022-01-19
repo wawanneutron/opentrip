@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('travel-package', 'TravelPackageController');
             Route::resource('gallery', 'GalleryController');
             Route::resource('transaction', 'TransactionController');
+            Route::get('/account-setting', 'AccountProfileController@index')->name('profile');
         });
 
     // user dashboard
@@ -67,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/history-transaction', 'DashboardUserController@historyTransaction')->name('dashboard-history');
             Route::get('/history-transaction/{id}', 'DashboardUserController@detailTransaction')->name('detail-transaction');
             Route::delete('/history-transaction/delete/{id}', 'DashboardUserController@destroy')->name('destory-incart');
+            Route::get('/account-setting', 'AccountProfileController@index')->name('profile');
         });
 });
 

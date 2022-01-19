@@ -41,7 +41,7 @@
 
         {{-- Transaksi --}}
          <li class="nav-item">
-             <a class="nav-link" href="{{ route('user.dashboard-history') }}">
+             <a class="nav-link" href="{{ route('user.profile') }}">
                <i class="fas fa-cog"></i>
                <span>Setting Account</span></a>
          </li>
