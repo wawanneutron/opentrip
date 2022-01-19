@@ -37,7 +37,7 @@ Route::post('/checkout/create/{detail_id}', 'CheckoutController@create')
     ->name('checkout-add-friend')
     ->middleware(['ensureUserRole:user', 'verified']);
 
-Route::get('/checkout/remove/{detail_id}', 'CheckoutController@remove')
+Route::delete('/checkout/remove/{detail_id}', 'CheckoutController@remove')
     ->name('checkout-remove')
     ->middleware(['ensureUserRole:user', 'verified']);
 

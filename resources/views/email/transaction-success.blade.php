@@ -267,7 +267,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
                           <tr>
                             <td align="left" style="font-size:0px;padding:10px 25px;padding-right:25px;padding-left:25px;word-break:break-word;">
-                              <div style="font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;line-height:20px;text-align:left;color:#071c4d;">Hi, {{ ($data->user->name) }} <br><br> Tiket digital kamu sudah berhasil dicetak. <br> Booking ID <strong> #{{ ($data->id) }} </strong></div>
+                              <div style="font-family:Assistant, Helvetica, Arial, sans-serif;font-size:18px;line-height:20px;text-align:left;color:#071c4d;">Hi, {{ ($data->user->name) }} <br><br> Tiket digital kamu sudah berhasil dicetak. <br> Transaksi ID Anda<strong> {{ ($data->kd_transaction) }} </strong></div>
                             </td>
                           </tr>
                           <tr>
@@ -293,12 +293,16 @@
                                   <td colspan="3">Travel Details</td>
                                 </tr>
                                 <tr>
-                                  <td><strong>Departure</strong></td>
-                                <td style="text-align: right; font-weight:500;">{{ $data->travel_package->title }}</td>
+                                  <td style="font-size: 16px;"><strong>Tujuan Opentrip</strong></td>
+                                <td style="text-align: right; font-weight:500; font-size: 16px;">{{ $data->travel_package->title }}</td>
                                 </tr>
                                 <tr>
-                                  <td><strong>Date and Time</strong></td>
-                                  <td style="text-align: right; font-weight:500;">
+                                  <td style="font-size: 16px;"><strong>Nama Daerah</strong></td>
+                                <td style="text-align: right; font-weight:500; font-size: 16px;">{{ $data->travel_package->location }}</td>
+                                </tr>
+                                <tr>
+                                  <td style="font-size: 16px;"><strong>Tgl Keberangkatan</strong></td>
+                                  <td style="text-align: right; font-weight:500; font-size: 16px;">
                                     {{ \Carbon\Carbon::create($data->travel_package->deperture_date)->format('F n, Y') }}
                                   </td>
                                 </tr>
@@ -373,7 +377,7 @@
                           <td style="width: 50px;">
                           <img src="{{ url('frontend/images/ic_help.png') }}" width="50px">
                           </td>
-                          <td style="font-size:18px; padding-left:10px; color:#071c4d; font-family:Assistant, Helvetica, Arial, sanf-serif; font-weight:600"> support@pealip.id <br> 021-2020-2022 </td>
+                          <td style="font-size:18px; padding-left:10px; color:#071c4d; font-family:Assistant, Helvetica, Arial, sanf-serif; font-weight:600"> support@opentrip.id <br> 021-2020-2022 </td>
                         </tr>
                       </table>
                     </td>

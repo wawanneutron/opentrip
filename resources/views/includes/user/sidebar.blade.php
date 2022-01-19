@@ -8,8 +8,6 @@
                   
         </a>
         
-  
-  
         <!-- Divider -->
         <hr class="sidebar-divider">
   
@@ -36,6 +34,16 @@
              <a class="nav-link" href="{{ route('user.dashboard-history') }}">
                <i class="fas fa-fw fa-dollar-sign"></i>
                <span>History Transaksi</span></a>
+         </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        {{-- Transaksi --}}
+         <li class="nav-item">
+             <a class="nav-link" href="{{ route('user.dashboard-history') }}">
+               <i class="fas fa-cog"></i>
+               <span>Setting Account</span></a>
          </li>
 
         <!-- Divider -->

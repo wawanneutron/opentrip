@@ -60,7 +60,7 @@
                       <td class="align-middle">
                         @if ($detail->user->id == Auth::user()->id)
                         @else
-                            <a href="{{ route('checkout-remove', $detail->id) }}" title="hapus">
+                            <a onclick="Delete(this.id)" id="{{ $detail->id }}" title="hapus" style="cursor: pointer">
                               <i class="fas fa-fw fa-trash text-danger"></i>
                             </a>
                         @endif
@@ -167,14 +167,34 @@
                             Anda akan diarahkan ke halaman lain untuk membayar menggunakan GO-PAY</p>
                     <img src="{{ url('frontend/images/gopay.png') }}" class="w-50" alt="">
                   </div>
-                  <!-- CTE -->
-                  <div class="join-container">
-                      <a href="{{ route('checkout-succses', $item->id) }}" class="btn btn-block btn-join-now mt-3 py-2">Lanjut ke Pembayaran</a>
-                  </div>
-                  <div class="text-center mt-3">
-                      <a href="{{ route('details', $item->travel_package->slug) }}" class="text-muted mt-3 py-2">Batalkan
-                          Pembayaran</a>
-                  </div>
+                  @if ($cek_member > $cek_kuota)
+                    <!-- CTE -->
+                    <div class="join-container">
+                        <a href="{{ route('checkout-succses', $item->id) }}" class="btn btn-block btn-join-now mt-3 py-2">Kuota Tidak Cukup</a>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('details', $item->travel_package->slug) }}" class="text-muted mt-3 py-2">Batalkan
+                            Pembayaran</a>
+                    </div>
+                  @elseif ($cek_kuota == 0)
+                     <!-- CTE -->
+                    <div class="join-container">
+                        <a href="{{ route('checkout-succses', $item->id) }}" class="btn btn-block btn-join-now mt-3 py-2">Kuota Sudah Habis</a>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('details', $item->travel_package->slug) }}" class="text-muted mt-3 py-2">Batalkan
+                            Pembayaran</a>
+                    </div>
+                  @else
+                    <!-- CTE -->
+                    <div class="join-container">
+                        <a href="{{ route('checkout-succses', $item->id) }}" class="btn btn-block btn-join-now mt-3 py-2">Lanjut ke Pembayaran</a>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('details', $item->travel_package->slug) }}" class="text-muted mt-3 py-2">Batalkan
+                            Pembayaran</a>
+                    </div>
+                  @endif
               </div>
           </div>
       </div>
@@ -200,4 +220,66 @@
       });
   });
 </script>
+@endpush
+
+@push('prepend-script')
+    <script>
+        //ajax delete switalert
+        function Delete(id) {
+            var id = id;
+            var token = $("meta[name='csrf-token']").attr("content");
+            swal({
+                title: "Ingin batal mengajak teman?",
+                // text: "Menghapus data ini akan menghapus data yang saling terhubung!",
+                icon: "warning",
+                buttons: [
+                    'TIDAK',
+                    'YA'
+                ],
+                dangerMode: true,
+            }).then(function(isConfirm) {
+                if (isConfirm) {
+                    //ajax delete
+                    jQuery.ajax({
+                        url: "{{ url('checkout/remove') }}/" + id,
+                        data: {
+                            "id": id,
+                            "_token": token
+                        },
+                        type: 'DELETE',
+                        success: function(response) {
+                            if (response.status == "success") {
+                                swal({
+                                    title: 'BERHASIL!',
+                                    text: 'DATA BERHASIL DIHAPUS!',
+                                    icon: 'success',
+                                    timer: 1000,
+                                    showConfirmButton: false,
+                                    showCancelButton: false,
+                                    buttons: false,
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            } else {
+                                swal({
+                                    title: 'GAGAL!',
+                                    text: 'DATA GAGAL DIHAPUS!',
+                                    icon: 'error',
+                                    timer: 1000,
+                                    showConfirmButton: false,
+                                    showCancelButton: false,
+                                    buttons: false,
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    return true;
+                }
+            })
+        }
+
+    </script>
 @endpush

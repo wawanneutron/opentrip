@@ -22,7 +22,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.dashboard') }}">
               <i class="fas fa-fw fa-tachometer-alt"></i>
-              <span>Dashboard</span></a>
+              <span>Analitik</span></a>
         </li>
 
 
@@ -70,6 +70,16 @@
              <a class="nav-link" href="{{ route('admin.transaction.index') }}">
                <i class="fas fa-fw fa-dollar-sign"></i>
                <span>Transaksi</span></a>
+         </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        {{-- Transaksi --}}
+         <li class="nav-item">
+             <a class="nav-link" href="{{ route('user.dashboard-history') }}">
+               <i class="fas fa-cog"></i>
+               <span>Setting Account</span></a>
          </li>
 
         <!-- Divider -->
