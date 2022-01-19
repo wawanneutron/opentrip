@@ -22,9 +22,15 @@ class CheckoutController extends Controller
 {
     public function index(Request $request, $id)
     {
+        $travel_package_id  = Transaction::with(['travel_package'])->find($id);
+        $cek_member         = TransactionDetail::whereTransactionsId($id)->count();
+        $cek_kuota          = $travel_package_id->travel_package->quota;
+
         $item = Transaction::with(['details', 'travel_package', 'user'])->findOrFail($id);
         return view('pages.checkout', [
-            'item' => $item
+            'item' => $item,
+            'cek_kuota' => $cek_kuota,
+            'cek_member' => $cek_member
         ]);
     }
 
@@ -47,12 +53,18 @@ class CheckoutController extends Controller
             'transaction_status' => 'IN_CART'
         ]);
 
-        TransactionDetail::create([
+        $transactionDetail = TransactionDetail::create([
             'transactions_id' => $transaction->id,
             'users_id' => Auth::user()->id,
         ]);
 
-        return redirect()->route('checkout', $transaction->id);
+        if ($transaction || $transactionDetail) {
+            return redirect()->route('checkout', $transaction->id)
+                ->with(['success' => 'Checkout berhasil, anda bisa mengajak teman untuk pergi bersama, sebelum melanjutkan kepembayaran']);
+        } else {
+            return redirect()->route('details', $transaction->travel_package->slug)
+                ->with(['error' => 'Gagal melakukan checkout']);
+        }
     }
 
     public function remove(Request $request, $detail_id)
@@ -66,16 +78,29 @@ class CheckoutController extends Controller
         $transaction->save();
         $item->delete();
 
-        return redirect()->route('checkout', $item->transactions_id);
+        if ($item) {
+            return response()->json([
+                'status' => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+            ]);
+        }
     }
 
     public function searchFreand(Request $req, $id)
     {
+        $travel_package_id  = Transaction::with(['travel_package'])->find($id);
+        $cek_member         = TransactionDetail::whereTransactionsId($id)->count();
+        $cek_kuota          = $travel_package_id->travel_package->quota;
+
         $users = User::where('userid', $req->username)
             ->orWhere('username', $req->username)
             ->get();
+
         $item = Transaction::with(['details', 'travel_package', 'user'])->findOrFail($id);
-        return view('pages.checkout', compact('users', 'item'));
+        return view('pages.checkout', compact('users', 'item', 'cek_kuota', 'cek_member'));
     }
 
     public function create(Request $request, $id)
@@ -87,14 +112,17 @@ class CheckoutController extends Controller
         $cek_auth       = $request->users_id == Auth::user()->id;
         $cek_admin      = $request->users_id == User::whereId(4)->first()->id;
 
-        if ($cek_kuota == $cekDetail) {
-            return 'mohon maaf kuota tidak cukup';
+        if ($cek_kuota <= $cekDetail) {
+            return redirect()->route('checkout', $id)
+                ->with(['error' => 'Teman yang anda masukan tidak cukup dengan kuota yang ada, kuota tersisa ' . $cek_kuota]);
         } elseif ($cekMember->exists()) {
-            return 'yang ditambahkan hanya bisa satu kali saja';
+            return redirect()->route('checkout', $id)
+                ->with(['error' => 'yang ditambahkan hanya bisa 1x saja dalam sekali checkout']);
         } else {
             # code...
             if ($cek_auth || $cek_admin) {
-                return 'Tidak boleh ini kamu iya kamu';
+                return redirect()->route('checkout', $id)
+                    ->with(['error' => 'tidak dapat menambahkan admin']);
             } else {
                 $data['transactions_id'] = $id;
                 $data['users_id'] = $request->users_id;
@@ -104,16 +132,24 @@ class CheckoutController extends Controller
 
             $transaction->save();
         }
-        return redirect()->route('checkout', $id);
+        if ($transaction) {
+            return redirect()->route('checkout', $id)
+                ->with(['success' => 'Berhasil menambahkan teman']);
+        }
     }
 
     public function succses(Request $request, $id)
     {
         $travel_package_id  = Transaction::with(['travel_package'])->find($id);
+        $cek_member         = TransactionDetail::whereTransactionsId($id)->count();
         $cek_kuota          = $travel_package_id->travel_package->quota;
 
-        if ($cek_kuota <= 0) {
-            return 'Kuota habis';
+        if ($cek_member > $cek_kuota) {
+            return redirect()->route('checkout', $id)
+                ->with(['error' => 'Teman yang anda masukan tidak cukup dengan kuota yang ada, kuota tersisa ' . $cek_kuota]);
+        } elseif ($cek_kuota == 0) {
+            return redirect()->route('checkout', $id)
+                ->with(['error' => 'Maaf kuota sudah habis']);
         } else {
             $transaction = Transaction::with([
                 'details', 'travel_package.galleries',
