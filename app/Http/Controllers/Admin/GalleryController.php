@@ -52,9 +52,15 @@ class GalleryController extends Controller
             'assets/gallery',
             'public'
         );
+        $storeGallery = Gallery::create($data);
 
-        Gallery::create($data);
-        return redirect()->route('admin.gallery.index');
+        if ($storeGallery) {
+            return redirect()->route('admin.gallery.index')
+                ->with(['success' => 'Data Berhasil Disimpan']);
+        } else {
+            return redirect()->route('admin.gallery.index')
+                ->with(['error' => 'Data Gagal Disimpan']);
+        }
     }
 
     /**
@@ -103,9 +109,15 @@ class GalleryController extends Controller
 
         $item = Gallery::findOrFail($id);
 
-        $item->update($data);
+        $updateGallery = $item->update($data);
 
-        return redirect()->route('admin.gallery.index');
+        if ($updateGallery) {
+            return redirect()->route('admin.gallery.index')
+                ->with(['success' => 'Data Berhasil Disimpan']);
+        } else {
+            return redirect()->route('admin.gallery.index')
+                ->with(['error' => 'Data Gagal Disimpan']);
+        }
     }
 
     /**
@@ -119,6 +131,14 @@ class GalleryController extends Controller
         $item = Gallery::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('admin.gallery.index');
+        if ($item) {
+            return response()->json([
+                'status'    => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 'error',
+            ]);
+        }
     }
 }

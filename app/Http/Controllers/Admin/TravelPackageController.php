@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Gallery;
 use App\Http\Controllers\Controller;
 use App\TravelPackage;
 use App\Http\Requests\Admin\TravelPackageRequest;
@@ -49,8 +50,15 @@ class TravelPackageController extends Controller
         $data['eat'] = $request->get('eat') == 'true' ? 1 : 0;
         $data['lodging_house'] = $request->get('lodging_house') == 'true' ? 1 : 0;
 
-        TravelPackage::create($data);
-        return redirect()->route('admin.travel-package.index');
+        $travelCreate = TravelPackage::create($data);
+
+        if ($travelCreate) {
+            return redirect()->route('admin.travel-package.index')
+                ->with(['success' => 'Data Berhasil Disimpan']);
+        } else {
+            return redirect()->route('admin.travel-package.index')
+                ->with(['error' => 'Data Gagal Disimpan']);
+        }
     }
 
     /**
@@ -96,9 +104,15 @@ class TravelPackageController extends Controller
         $data['eat'] = $request->get('eat') == 'true' ? 1 : 0;
         $data['lodging_house'] = $request->get('lodging_house') == 'true' ? 1 : 0;
 
-        $item->update($data);
+        $travelUpdate = $item->update($data);
 
-        return redirect()->route('admin.travel-package.index');
+        if ($travelUpdate) {
+            return redirect()->route('admin.travel-package.index')
+                ->with(['success' => 'Data Berhasil Diupdate']);
+        } else {
+            return redirect()->route('admin.travel-package.index')
+                ->with(['error' => 'Data Gagal Diupdate']);
+        }
     }
 
     /**
@@ -110,8 +124,18 @@ class TravelPackageController extends Controller
     public function destroy($id)
     {
         $item = TravelPackage::findOrFail($id);
+        $gallery = Gallery::whereTravelPackagesId($id);
         $item->delete();
+        $gallery->delete();
 
-        return redirect()->route('admin.travel-package.index');
+        if ($item) {
+            return response()->json([
+                'status'    => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 'error',
+            ]);
+        }
     }
 }

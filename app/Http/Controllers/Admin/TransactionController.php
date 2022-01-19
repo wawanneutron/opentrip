@@ -34,7 +34,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        // return view('pages.admin.transaction.create');
+        // 
     }
 
     /**
@@ -45,11 +45,7 @@ class TransactionController extends Controller
      */
     public function store(TransactionRequest $request)
     {
-        // $data = $request->all();
-        // $data['slug'] = Str::slug($request->title);
-
-        // Transaction::create($data);
-        // return redirect()->route('admin.transaction.index');
+        // 
     }
 
     /**
@@ -77,11 +73,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        $item = Transaction::findOrFail($id);
-
-        return view('pages.admin.transaction.edit', [
-            'item' => $item
-        ]);
+        //    
     }
 
     /**
@@ -93,14 +85,7 @@ class TransactionController extends Controller
      */
     public function update(TransactionRequest $request, $id)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
-
-        $item = Transaction::findOrFail($id);
-
-        $item->update($data);
-
-        return redirect()->route('admin.transaction.index');
+        //    
     }
 
     /**
@@ -114,6 +99,14 @@ class TransactionController extends Controller
         $item = Transaction::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('admin.transaction.index');
+        if ($item) {
+            return response()->json([
+                'status'    => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 'error',
+            ]);
+        }
     }
 }
