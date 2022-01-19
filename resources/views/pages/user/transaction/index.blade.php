@@ -38,13 +38,9 @@
                     <i class="fa fa-eye"></i>
                   </a>
                   @if ($item->transaction_status == 'IN_CART')
-                    <form action="{{ route('user.destory-incart', $item->id) }}" method="POST" class="d-inline">
-                      @csrf
-                      @method('delete')
-                      <button class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </form>
+                    <button onclick="Delete(this.id)" id="{{ $item->id }}" class="btn btn-danger">
+                      <i class="fa fa-trash"></i>
+                    </button>
                   @endif
                 </td>
               </tr>
@@ -67,3 +63,65 @@
 </div>
 
 @endsection
+
+@push('addon-script')
+    <script>
+        //ajax delete switalert
+        function Delete(id) {
+            var id = id;
+            var token = $("meta[name='csrf-token']").attr("content");
+            swal({
+                title: "Yakin ingin hapus?",
+                // text: "Menghapus data ini akan menghapus data yang saling terhubung!",
+                icon: "warning",
+                buttons: [
+                    'TIDAK',
+                    'YA'
+                ],
+                dangerMode: true,
+            }).then(function(isConfirm) {
+                if (isConfirm) {
+                    //ajax delete
+                    jQuery.ajax({
+                        url: "{{ url('user/dashboard/history-transaction/delete') }}/" + id,
+                        data: {
+                            "id": id,
+                            "_token": token
+                        },
+                        type: 'DELETE',
+                        success: function(response) {
+                            if (response.status == "success") {
+                                swal({
+                                    title: 'BERHASIL!',
+                                    text: 'DATA BERHASIL DIHAPUS!',
+                                    icon: 'success',
+                                    timer: 1000,
+                                    showConfirmButton: false,
+                                    showCancelButton: false,
+                                    buttons: false,
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            } else {
+                                swal({
+                                    title: 'GAGAL!',
+                                    text: 'DATA GAGAL DIHAPUS!',
+                                    icon: 'error',
+                                    timer: 1000,
+                                    showConfirmButton: false,
+                                    showCancelButton: false,
+                                    buttons: false,
+                                }).then(function() {
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    return true;
+                }
+            })
+        }
+
+    </script>
+@endpush

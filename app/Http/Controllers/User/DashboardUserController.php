@@ -37,6 +37,14 @@ class DashboardUserController extends Controller
         $item = Transaction::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('user.dashboard-history');
+        if ($item) {
+            return response()->json([
+                'status'    => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 'error',
+            ]);
+        }
     }
 }
