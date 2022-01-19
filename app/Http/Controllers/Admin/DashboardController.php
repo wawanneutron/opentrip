@@ -14,8 +14,9 @@ class DashboardController extends Controller
         return view('pages.admin.dashboard', [
             'travel_package' => TravelPackage::count(),
             'transactions' => Transaction::count(),
-            'transaction_pending' => Transaction::where('transaction_status', 'PENDING')->count(),
-            'transaction_success' => Transaction::where('transaction_status', 'SUCCESS')->count(),
+            'transaction_pending' => Transaction::whereTransactionStatus('PENDING')->count(),
+            'transaction_success' => Transaction::whereTransactionStatus('SUCCESS')->count(),
+            'transaction_cart' => Transaction::whereTransactionStatus('IN_CART')->count(),
         ]);
     }
 }

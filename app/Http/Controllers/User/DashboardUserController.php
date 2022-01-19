@@ -11,7 +11,12 @@ class DashboardUserController extends Controller
 {
     public function index()
     {
-        return view('pages.user.dashboard');
+        return view('pages.user.dashboard', [
+            'transactions' => Transaction::whereUsersId(Auth::user()->id)->count(),
+            'transaction_pending' => Transaction::whereTransactionStatus('PENDING')->whereUsersId(Auth::user()->id)->count(),
+            'transaction_success' => Transaction::whereTransactionStatus('SUCCESS')->whereUsersId(Auth::user()->id)->count(),
+            'transaction_cart' => Transaction::whereTransactionStatus('IN_CART')->whereUsersId(Auth::user()->id)->count(),
+        ]);
     }
 
     public function historyTransaction()

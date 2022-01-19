@@ -12,24 +12,6 @@
 
   <!-- Content Row -->
   <div class="row">
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Paket Travel</div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-luggage-cart fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
@@ -37,7 +19,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Transaksi</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $transactions }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -56,7 +38,7 @@
               <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pending</div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $transaction_pending }}</div>
                 </div>
               </div>
             </div>
@@ -74,11 +56,28 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Sukses</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Success</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $transaction_success }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">In Cart</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $transaction_cart }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
