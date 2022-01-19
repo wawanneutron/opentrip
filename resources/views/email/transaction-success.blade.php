@@ -425,7 +425,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="center" style="font-size:0px;padding:10px 25px;padding-right:25px;padding-left:25px;word-break:break-word;">
-                      <div style="font-family:Assistant, Helvetica, Arial, sanf-serif;font-size:15px;line-height:1;text-align:center;color:#888b93;">2019 Copyright WawanNeutron - All right reserved.</div>
+                      <div style="font-family:Assistant, Helvetica, Arial, sanf-serif;font-size:15px;line-height:1;text-align:center;color:#888b93;">2022 Copyright OpenTrip - All right reserved.</div>
                     </td>
                   </tr>
                 </table>
