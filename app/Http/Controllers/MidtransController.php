@@ -46,7 +46,7 @@ class MidtransController extends Controller
                 for ($i = 0; $i < $length; $i++) {
                     $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
                 }
-                $no_tiket = 'TKET-' . Str::upper($random);
+                $no_tiket = 'TIKET-' . Str::upper($random);
                 $datas->no_ticket = $no_tiket;
                 $datas->update();
             }
