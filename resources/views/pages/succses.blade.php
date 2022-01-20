@@ -8,11 +8,11 @@
       <div class="col text-center">
           <div class="animasi-succses">
               <img src="{{ url('frontend/images/ic-succsess.png') }}" alt="" class="mb-2">
-              <h1>Yay! Succsess</h1>
+              <h1>Yay! Berhasil</h1>
               <p>
-                  We've sent you email for trip
+                  Kami telah mengirimkan email e-tiket opentrip
                   <br>
-                  instruction please reade it as well
+                  silahkan cek email masuk
               </p>
           </div>
           <div class="animasi-btn">

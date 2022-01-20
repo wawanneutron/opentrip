@@ -303,7 +303,7 @@
                                 <tr>
                                   <td style="font-size: 16px;"><strong>Tgl Keberangkatan</strong></td>
                                   <td style="text-align: right; font-weight:500; font-size: 16px;">
-                                    {{ \Carbon\Carbon::create($data->travel_package->deperture_date)->format('F n, Y') }}
+                                    {{ \Carbon\Carbon::create($data->travel_package->deperture_date)->format('F d, Y') }}
                                   </td>
                                 </tr>
                               </table>
