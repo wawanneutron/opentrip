@@ -31,12 +31,11 @@
                                 Hi, {{ Auth::user()->name }} <i class="fas fa-caret-down ms-1"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item disabled mb-2" href="#">
+                                        {{ Auth::user()->userid }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                         <i class="fas fa-fw fa-tachometer-alt me-1 text-black-50"></i>
                                         Dashboard</a></li>
-                                <li><a class="dropdown-item" href="#">
-                                        <i class="fas fa-user-cog me-1 text-black-50"></i>
-                                        My Profile</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -47,15 +46,14 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link p-0 nav-avatar" id="navbarDropdown" role="button" data-toggle="dropdown">
                                 <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" style="width: 45px !important;" alt="user" class="rounded-circle mr-2" style="width: 50px; height: 50px;" />
-                                Hi, {{ Auth::user()->name }} <i class="fas fa-caret-down ms-1"></i>
+                                Hi, {{ Auth::user()->name }} <i class="fas fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item disabled mb-2" href="#">
+                                        {{ Auth::user()->userid }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">
                                         <i class="fas fa-fw fa-tachometer-alt me-1 text-black-50"></i>
                                         Dashboard</a></li>
-                                <li><a class="dropdown-item" href="#">
-                                        <i class="fas fa-user-cog me-1 text-black-50"></i>
-                                        My Profile</a></li>
                             </ul>
                         </li>
                     </ul>
